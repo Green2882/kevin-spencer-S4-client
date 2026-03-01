@@ -5,8 +5,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
-
-public class flightClient {
+public class FlightClient {
 
     private RestClient restClient;
 
