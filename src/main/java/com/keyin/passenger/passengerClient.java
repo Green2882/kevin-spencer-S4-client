@@ -7,7 +7,6 @@ import tools.jackson.databind.ObjectMapper;
 import java.util.List;
 
 public class passengerClient {
-
     private RestClient restClient;
 
     public List<Passenger> getAllPassengers() {
