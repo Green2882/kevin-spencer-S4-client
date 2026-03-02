@@ -48,5 +48,28 @@ public class MidtermClientApplication {
             }
         }
 
+        System.out.println("\n2) What aircraft has each passenger flown on?");
+
+        List<Flight> flights = flightClient.getAllFlights();
+
+        Map<String, Set<String>> aircraftByPassenger = new LinkedHashMap<>();
+
+        for (Flight flight : flights) {
+            String aircraftLabel = flight.getAircraft().getType() + " - " + flight.getAircraft().getAirlineName();
+
+            for (Passenger passenger : flight.getPassengers()) {
+                String passengerKey = passenger.getFirstName() + " " + passenger.getLastName();
+                aircraftByPassenger.computeIfAbsent(passengerKey, k -> new LinkedHashSet<>()).add(aircraftLabel);
+            }
+        }
+
+        for (Map.Entry<String, Set<String>> entry : aircraftByPassenger.entrySet()) {
+            System.out.println(entry.getKey() + ":");
+            for (String aircraftLabel : entry.getValue()) {
+                System.out.println(" - " + aircraftLabel);
+            }
+        }
+
+
     }
 }
