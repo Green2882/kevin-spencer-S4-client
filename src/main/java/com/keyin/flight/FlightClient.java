@@ -13,7 +13,7 @@ public class FlightClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("http://localhost:8080/airport");
+            restClient.setURLRoot("http://localhost:8080/flights");
 
             String response = restClient.sendGetRequest();
 
