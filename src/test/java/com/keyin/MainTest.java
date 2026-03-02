@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest {
+public class MidtermClientApplicationTest {
 
     @Test
     public void testMainExit() {
@@ -18,7 +18,7 @@ public class MainTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Main.main(new String[]{});
+        MidtermClientApplication.main(new String[]{});
 
         String expectedOutput = "Exiting...";
         assertTrue(outContent.toString().contains(expectedOutput));
@@ -33,7 +33,7 @@ public class MainTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Main.main(new String[]{});
+        MidtermClientApplication.main(new String[]{});
 
         String expectedOutput = "Invalid choice. Please try again.";
         assertTrue(outContent.toString().contains(expectedOutput));
