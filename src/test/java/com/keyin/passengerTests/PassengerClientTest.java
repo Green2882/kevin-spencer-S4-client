@@ -2,7 +2,7 @@ package com.keyin.passengerTests;
 
 import com.keyin.common.RestClient;
 import com.keyin.passenger.Passenger;
-import com.keyin.passenger.passengerClient;
+import com.keyin.passenger.PassengerClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ public class PassengerClientTest {
 
     @Test
     public void testGetAllPassengers() throws Exception {
-        passengerClient passengerClientUnderTest = new passengerClient();
+        PassengerClient passengerClientUnderTest = new PassengerClient();
         passengerClientUnderTest.setRestClient(mockRestClient);
 
         Mockito.when(mockRestClient.sendGetRequest()).thenReturn(
