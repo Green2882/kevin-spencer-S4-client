@@ -13,13 +13,16 @@ public class RestClient {
     private HttpClient client;
 
     public String sendGetRequest() {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(URLRoot)).build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(URLRoot))
+                .build();
 
         try {
-            HttpResponse<String> response = getClient().send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                System.out.println("***** " + response.body());
-            } else {
+            HttpResponse<String> response =
+                    getClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() != 200) {
                 System.out.println("Error Status Code: " + response.statusCode());
             }
 
