@@ -1,14 +1,16 @@
 package com.keyin.aircraft;
 
+import com.keyin.airline.Airline;
+
 public class Aircraft {
     private Long id;
     private String type;
-    private String airlineName;
+    private Airline airline;
     private String numOfPassengers;
 
     public Aircraft(String type, String airlineName, String numOfPassengers) {
         this.type = type;
-        this.airlineName = airlineName;
+        Airline airline = new Airline(airlineName);
         this.numOfPassengers = numOfPassengers;
     }
 
@@ -22,10 +24,6 @@ public class Aircraft {
         this.id = id;
     }
 
-    public String getAirlineName() {
-        return airlineName;
-    }
-
     public String getNumOfPassengers() {
         return numOfPassengers;
     }
@@ -34,8 +32,12 @@ public class Aircraft {
         this.numOfPassengers = numOfPassengers;
     }
 
-    public void setAirlineName(String airlineName) {
-        this.airlineName = airlineName;
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    public Airline getAirline() {
+        return airline;
     }
 
     public String getType() {
@@ -51,7 +53,7 @@ public class Aircraft {
         return "Aircraft{" +
                 "id='" + id + '\'' +
                 ", type='" + type + '\'' +
-                ", airlineName='" + airlineName + '\'' +
+                ", airline='" + airline + '\'' +
                 ", numOfPassengers='" + numOfPassengers + '\'' +
                 '}';
     }
