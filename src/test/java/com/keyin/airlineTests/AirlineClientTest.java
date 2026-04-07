@@ -31,6 +31,6 @@ public class AirlineClientTest {
 
         Assertions.assertNotNull(airlines);
         Assertions.assertEquals(1, airlines.size());
-        Assertions.assertEquals("Air Canada", airlines.get(0).getName());
+        Assertions.assertEquals("Air Canada", airlines.getFirst().getName());
     }
 }
