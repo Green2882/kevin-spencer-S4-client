@@ -8,14 +8,7 @@ const Home = () => {
     <>
       <div className="index-box">
         <div className="links-box">
-          <Link
-            to="/"
-            style={{
-              color: "black",
-              textDecoration: "none",
-              float: "left",
-            }}
-          >
+          <Link to="/index">
             <h1 className="header-title">Airport & Flight Tracker</h1>
           </Link>
           <div className="login-link">
@@ -23,6 +16,18 @@ const Home = () => {
           </div>
           <div className="flight-link">
             <Link to="/flights">Flights</Link>
+          </div>
+          <div className="airport-info">
+            <form>
+              <label for="Airport">Airport: </label>
+              <select name="Airport">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <input type="submit" value="View" />
+            </form>
           </div>
         </div>
         <div className="content-box"></div>
