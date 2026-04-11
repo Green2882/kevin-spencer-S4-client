@@ -1,7 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Flights = () => {
   const navigate = useNavigate();
+  const [flights, setFlights] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/flights")
+      .then((response) => response.json())
+      .then((data) => setFlights(data));
+  }, []);
 
   return (
     <>
@@ -45,12 +53,14 @@ const Flights = () => {
                   <th>Flight Location</th>
                   <th>Arrival Time</th>
                 </tr>
-                <tr>
-                  <td>Something</td>
-                  <td>Something</td>
-                  <td>Something</td>
-                  <td>Something</td>
-                </tr>
+                {flights.map((flight) => (
+                  <tr key={flight.flightNumber}>
+                    <td>{flight.flightNumber}</td>
+                    <td>{flight.departureTime}</td>
+                    <td>{flight.flightLocation}</td>
+                    <td>{flight.arrivalTime}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
