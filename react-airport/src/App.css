@@ -169,3 +169,16 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* Flight Styling */
+.flight-table{
+  width: 800px;
+  margin: 10px auto auto;
+  text-align: center;
+}
+
+table, th, td{
+  padding: 5px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
