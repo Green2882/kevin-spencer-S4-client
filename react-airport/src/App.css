@@ -71,6 +71,27 @@
   color: #e3dfdf;
 }
 
+.admin-link a{
+  padding: 5px;
+  margin-right: 20px;
+  margin-top: 35px;
+  float: right;
+  color: black;
+  background-color: #e3dfdf;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 75px;
+  text-align: center;
+  height: 30px;
+  font-size: 12pt;
+}
+
+.admin-link:hover a {
+  background-color: black;
+  color: #e3dfdf;
+}
+
 .airport-info{
   float:right;
   margin-top: 25px;
@@ -127,6 +148,16 @@
   border: 1px solid black;
   height: 500px;
   border-radius: 10px;
+}
+
+.airport-display{
+  width: 800px;
+  margin: 10px auto auto;
+  background-color: white;
+}
+
+.airport-display h2, p{
+  background-color: white;
 }
 
 /*Login styling*/

@@ -4,12 +4,49 @@ import { useState, useEffect } from "react";
 const Flights = () => {
   const navigate = useNavigate();
   const [flights, setFlights] = useState([]);
+  const [airports, setAirports] = useState([]);
+  const [selectedAirport, setSelectedAirport] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/flights")
-      .then((response) => response.json())
-      .then((data) => setFlights(data));
+    const auth = localStorage.getItem("auth");
+
+    // Fetch flights
+    fetch("http://localhost:8080/flights", {
+      headers: {
+        Authorization: auth,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setFlights(data))
+      .catch((error) => console.error("Error fetching flights:", error));
+
+    // Fetch airports
+    fetch("http://localhost:8080/airports", {
+      headers: {
+        Authorization: auth,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setAirports(data))
+      .catch((error) => console.error("Error fetching airports:", error));
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedAirport) {
+      navigate(`/index?airportId=${selectedAirport}`);
+    }
+  };
 
   return (
     <>
@@ -24,20 +61,22 @@ const Flights = () => {
           <div className="flight-link">
             <Link to="/flights">Flights</Link>
           </div>
+          <div className="admin-link">
+            <Link to="/admin">Admin</Link>
+          </div>
           <div className="airport-info">
-            <form>
-              <label for="Airport">Airport: </label>
-              <select name="Airport">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+            <form onSubmit={handleSubmit}>
+              <select
+                name="Airport"
+                id="Airport"
+                onChange={(e) => setSelectedAirport(e.target.value)}
+              >
+                <option value="">Select an airport</option>
+                {airports.map((airport) => (
+                  <option key={airport.id} value={airport.id}>
+                    {airport.name}
+                  </option>
+                ))}
               </select>
               <input type="submit" value="View" />
             </form>
@@ -45,7 +84,7 @@ const Flights = () => {
         </div>
         <div className="content-box">
           <div className="flight-table">
-            <table style={{ width: "798px" }}>
+            <table style={{ width: "800px" }}>
               <tbody>
                 <tr>
                   <th>Flight Number</th>
@@ -57,7 +96,7 @@ const Flights = () => {
                   <tr key={flight.flightNumber}>
                     <td>{flight.flightNumber}</td>
                     <td>{flight.departureTime}</td>
-                    <td>{flight.flightLocation}</td>
+                    <td>{flight.destinationAirport.name}</td>
                     <td>{flight.arrivalTime}</td>
                   </tr>
                 ))}
