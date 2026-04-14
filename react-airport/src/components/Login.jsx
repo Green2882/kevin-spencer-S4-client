@@ -14,7 +14,7 @@ const Login = () => {
     const basicAuth = "Basic " + btoa(username + ":" + password);
 
     try {
-      const response = await fetch("http://localhost:8080/airports", {
+      const response = await fetch("http://54.234.11.162:8080/airports", {
         method: "GET",
         headers: {
           Authorization: basicAuth,

@@ -11,7 +11,7 @@ const Flights = () => {
     const auth = localStorage.getItem("auth");
 
     // Fetch flights
-    fetch("http://localhost:8080/flights", {
+    fetch("http://54.234.11.162:8080/flights", {
       headers: {
         Authorization: auth,
       },
@@ -26,7 +26,7 @@ const Flights = () => {
       .catch((error) => console.error("Error fetching flights:", error));
 
     // Fetch airports
-    fetch("http://localhost:8080/airports", {
+    fetch("http://54.234.11.162:8080/airports", {
       headers: {
         Authorization: auth,
       },
@@ -89,14 +89,20 @@ const Flights = () => {
                 <tr>
                   <th>Flight Number</th>
                   <th>Departure Time</th>
-                  <th>Flight Location</th>
+                  <th>Flight Details</th>
                   <th>Arrival Time</th>
                 </tr>
                 {flights.map((flight) => (
                   <tr key={flight.flightNumber}>
                     <td>{flight.flightNumber}</td>
                     <td>{flight.departureTime}</td>
-                    <td>{flight.destinationAirport.name}</td>
+                    <td>
+                      {flight.originAirport ? flight.originAirport.name : "N/A"}{" "}
+                      -&gt;{" "}
+                      {flight.destinationAirport
+                        ? flight.destinationAirport.name
+                        : "N/A"}
+                    </td>
                     <td>{flight.arrivalTime}</td>
                   </tr>
                 ))}
