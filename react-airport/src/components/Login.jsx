@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://34.229.16.201:8080/api/1.0.0/airports",
+        "http://54.197.148.236:8080/api/1.0.0/airports",
         {
           method: "GET",
           headers: {
