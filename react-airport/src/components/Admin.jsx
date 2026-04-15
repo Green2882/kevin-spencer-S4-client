@@ -16,19 +16,19 @@ const Admin = () => {
     const auth = localStorage.getItem("auth");
     const headers = { Authorization: auth };
 
-    fetch("http://34.229.16.201:8080/api/1.0.0/airports", { headers })
+    fetch("http://54.197.148.236:8080/api/1.0.0/airports", { headers })
       .then((r) => r.json())
       .then((data) => setAirports(Array.isArray(data) ? data : []))
       .catch(() => {});
-    fetch("http://34.229.16.201:8080/api/1.0.0/airline", { headers })
+    fetch("http://54.197.148.236:8080/api/1.0.0/airline", { headers })
       .then((r) => r.json())
       .then((data) => setAirlines(Array.isArray(data) ? data : []))
       .catch(() => {});
-    fetch("http://34.229.16.201:8080/api/1.0.0/aircraft", { headers })
+    fetch("http://54.197.148.236:8080/api/1.0.0/aircraft", { headers })
       .then((r) => r.json())
       .then((data) => setAircrafts(Array.isArray(data) ? data : []))
       .catch(() => {});
-    fetch("http://34.229.16.201:8080/api/1.0.0/cities", { headers })
+    fetch("http://54.197.148.236:8080/api/1.0.0/cities", { headers })
       .then((r) => r.json())
       .then((data) => setCities(Array.isArray(data) ? data : []))
       .catch(() => {});
@@ -42,9 +42,9 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = localStorage.getItem("auth");
-    let endpoint = `http://34.229.16.201:8080/api/1.0.0/${activeTab}`;
+    let endpoint = `http://54.197.148.236:8080/api/1.0.0/${activeTab}`;
     if (activeTab === "aircraft")
-      endpoint = "http://34.229.16.201:8080/api/1.0.0/aircraft";
+      endpoint = "http://54.197.148.236:8080/api/1.0.0/aircraft";
 
     let body = { ...formData };
 

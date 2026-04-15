@@ -17,7 +17,7 @@ const Home = () => {
 
     if (airportId) {
       // Fetch airport details
-      fetch(`http://34.229.16.201:8080/api/1.0.0/airports/${airportId}`, {
+      fetch(`http://54.197.148.236:8080/api/1.0.0/airports/${airportId}`, {
         headers: {
           Authorization: auth,
         },
@@ -27,7 +27,7 @@ const Home = () => {
         .catch((error) => console.error("Error fetching airport:", error));
 
       // Fetch all flights and then filter
-      fetch(`http://34.229.16.201:8080/api/1.0.0/flights`, {
+      fetch(`http://54.197.148.236:8080/api/1.0.0/flights`, {
         headers: {
           Authorization: auth,
         },
@@ -47,7 +47,7 @@ const Home = () => {
     }
 
     // Fetch all airports for the dropdown
-    fetch("http://34.229.16.201:8080/api/1.0.0/airports", {
+    fetch("http://54.197.148.236:8080/api/1.0.0/airports", {
       headers: {
         Authorization: auth,
       },
