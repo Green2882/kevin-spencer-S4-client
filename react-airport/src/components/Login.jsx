@@ -14,12 +14,15 @@ const Login = () => {
     const basicAuth = "Basic " + btoa(username + ":" + password);
 
     try {
-      const response = await fetch("http://54.234.11.162:8080/airports", {
-        method: "GET",
-        headers: {
-          Authorization: basicAuth,
+      const response = await fetch(
+        "http://34.229.16.201:8080/api/1.0.0/airports",
+        {
+          method: "GET",
+          headers: {
+            Authorization: basicAuth,
+          },
         },
-      });
+      );
 
       if (response.ok) {
         localStorage.setItem("auth", basicAuth);
