@@ -27,10 +27,13 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem("auth", basicAuth);
         navigate("/index");
-      } else {
+      } else if (response.status === 401) {
         setMessage("Invalid username or password");
+      } else {
+        setMessage(`Login failed: ${response.status}`);
       }
     } catch (error) {
+      console.error(error);
       setMessage("Could not connect to server");
     }
   };
