@@ -1,0 +1,352 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #e3dfdf;
+  font-family: 'Poppins', sans-serif;
+}
+
+.index-box{
+  width: 1000px;
+  margin: auto;
+}
+
+.links-box{
+  width: 1000px;
+  height: 100px;
+  border: 1px solid black;
+  margin-top: 20px;
+  background: white;
+  color: black;
+  border-radius: 10px;
+}
+
+.header-title {
+  margin-top: 30px;
+  margin-left: 15px;
+  background: white;
+  float: left;
+  text-decoration: none;
+  color: black;
+}
+
+.login-link a{
+  padding: 5px;
+  margin-right: 20px;
+  margin-top: 35px;
+  float: right;
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 75px;
+  text-align: center;
+  height: 30px;
+  font-size: 12pt;
+}
+
+.login-link:hover a {
+  background-color: black;
+  color: #e3dfdf;
+}
+
+.admin-link a{
+  padding: 5px;
+  margin-right: 20px;
+  margin-top: 35px;
+  float: right;
+  color: black;
+  background-color: #e3dfdf;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 75px;
+  text-align: center;
+  height: 30px;
+  font-size: 12pt;
+}
+
+.admin-link:hover a {
+  background-color: black;
+  color: #e3dfdf;
+}
+
+.airport-info{
+  float:right;
+  margin-top: 25px;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: white;
+  color: black;
+}
+
+.airport-info label{
+  background-color: white;
+  margin-right: 5px;
+}
+
+.airport-info select{
+  background-color: white;
+  margin-right: 5px;
+  color: black;
+  width: 220px;
+}
+
+.airport-info option{
+  background-color: white;
+}
+
+.airport-info input{
+  background-color: #e3dfdf;
+  margin-right: 5px;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 75px;
+  height: 30px;
+  font-size: 12pt;
+}
+
+.airport-info input:hover{
+  cursor: pointer;
+  background-color: black;
+  color: #e3dfdf;
+}
+
+.airport-info form{
+  color: black;
+  background-color: white;
+  padding: 5px;
+}
+
+.content-box{
+  background: white;
+  width: 1000px;
+  margin-top: 10px;
+  border: 1px solid black;
+  height: 600px;
+  border-radius: 10px;
+}
+
+.airport-display{
+  width: 800px;
+  height: 30px;
+  margin: 10px auto auto;
+  background-color: white;
+}
+
+.airport-display h2{
+  float: left;
+  background-color: white;
+}
+
+.airport-display p{
+  float: right;
+  background-color: white;
+}
+
+.flights-container{
+  margin: 10px;
+}
+
+.flights-container h3{
+  text-align: center;
+  background-color: white;
+}
+
+.arrivals{
+  width: 485px;
+  float: left;
+  background-color: white;
+}
+
+.arrivals table{
+  width: 485px;
+}
+
+.arrivals table, th, tr, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.arrivals td{
+  background-color: white;
+  text-align: center;
+}
+
+.departures{
+  width: 485px;
+  float: right;
+  background-color: white;
+}
+
+.departures table{
+  width: 485px;
+}
+
+.departures table, th, tr, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.departures td{
+  background-color: white;
+  text-align: center;
+}
+
+/*Login styling*/
+.login-box h2{
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e3dfdf;
+  border-radius: 10px;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-box input {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.login-box button {
+  padding: 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #0056b3;
+}
+
+/* Admin Styling */
+.admin-content {
+  height: auto;
+}
+
+.admin-topbar {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+  background: #f8f9fa;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.admin-topbar-btn {
+  padding: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.admin-topbar-btn.active {
+  background: black;
+  color: white;
+}
+
+.admin-topbar-btn.inactive {
+  background: white;
+  color: black;
+}
+
+.admin-main-area {
+  flex: 1;
+  padding: 40px 20px 20px 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 500px;
+  background: white;
+  padding: 30px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.admin-form h2 {
+  text-align: center;
+  padding: 10px;
+  margin-top: 0;
+  background-color: white;
+}
+
+.admin-form input, .admin-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  color: black;
+}
+
+.admin-form button {
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-form button:hover {
+  background: #0056b3;
+}
+
+.admin-message {
+  font-weight: bold;
+  margin-bottom: 15px;
+  background: white;
+  text-align: center;
+}
+
+.admin-message.success {
+  color: green;
+}
+
+.admin-message.error {
+  color: red;
+}
+
+.admin-form-container {
+  margin-top: 30px;
+  background: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+}
