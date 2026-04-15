@@ -3,6 +3,7 @@ package com.keyin.aircraftTests;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.aircraft.AircraftClient;
 import com.keyin.airline.Airline;
+import com.keyin.airline.AirlineClient;
 import com.keyin.common.RestClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,6 @@ public class AircraftClientTest {
 
         Assertions.assertNotNull(aircrafts);
         Assertions.assertEquals(1,aircrafts.size());
-        Assertions.assertEquals("Air Canada", Airline.getName());
+        Assertions.assertEquals("Air Canada",aircrafts.getFirst().getAirline());
     }
 }
