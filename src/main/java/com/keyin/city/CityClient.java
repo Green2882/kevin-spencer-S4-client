@@ -14,7 +14,7 @@ public class CityClient {
 
         if(getRestClient() != null) {
 
-            restClient.setURLRoot("http://34.229.16.201:8080/api/1.0.0/cities");
+            restClient.setURLRoot("http://54.197.148.236:8080/api/1.0.0/cities");
 
             String response = restClient.sendGetRequest();
 
