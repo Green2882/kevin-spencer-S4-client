@@ -1,8 +1,45 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [airport, setAirport] = useState(null);
+  const [airports, setAirports] = useState([]);
+  const [selectedAirport, setSelectedAirport] = useState("");
+
+  useEffect(() => {
+    const auth = localStorage.getItem("auth");
+    const params = new URLSearchParams(location.search);
+    const airportId = params.get("airportId");
+
+    if (airportId) {
+      fetch(`http://54.234.11.162:8080/airports/${airportId}`, {
+        headers: {
+          Authorization: auth,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setAirport(data))
+        .catch((error) => console.error("Error fetching airport:", error));
+    }
+
+    fetch("http://54.234.11.162:8080/airports", {
+      headers: {
+        Authorization: auth,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setAirports(data))
+      .catch((error) => console.error("Error fetching airports:", error));
+  }, [location]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedAirport) {
+      navigate(`/index?airportId=${selectedAirport}`);
+    }
+  };
 
   return (
     <>
@@ -17,26 +54,35 @@ const Home = () => {
           <div className="flight-link">
             <Link to="/flights">Flights</Link>
           </div>
+          <div className="admin-link">
+            <Link to="/admin">Admin</Link>
+          </div>
           <div className="airport-info">
-            <form>
-              <label for="Airport">Airport: </label>
-              <select name="Airport">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+            <form onSubmit={handleSubmit}>
+              <select
+                name="Airport"
+                id="Airport"
+                onChange={(e) => setSelectedAirport(e.target.value)}
+              >
+                <option value="">Select an airport</option>
+                {airports.map((airport) => (
+                  <option key={airport.id} value={airport.id}>
+                    {airport.name}
+                  </option>
+                ))}
               </select>
               <input type="submit" value="View" />
             </form>
           </div>
         </div>
-        <div className="content-box"></div>
+        <div className="content-box">
+          {airport && (
+            <div className="airport-display">
+              <h2>{airport.name}</h2>
+              <p>Code: {airport.code}</p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
