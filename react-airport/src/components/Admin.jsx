@@ -18,19 +18,19 @@ const Admin = () => {
 
     fetch("http://34.229.16.201:8080/api/1.0.0/airports", { headers })
       .then((r) => r.json())
-      .then(setAirports)
+      .then((data) => setAirports(Array.isArray(data) ? data : []))
       .catch(() => {});
-    fetch("http://34.229.16.201:8080/api/1.0.0/airlines", { headers })
+    fetch("http://34.229.16.201:8080/api/1.0.0/airline", { headers })
       .then((r) => r.json())
-      .then(setAirlines)
+      .then((data) => setAirlines(Array.isArray(data) ? data : []))
       .catch(() => {});
     fetch("http://34.229.16.201:8080/api/1.0.0/aircraft", { headers })
       .then((r) => r.json())
-      .then(setAircrafts)
+      .then((data) => setAircrafts(Array.isArray(data) ? data : []))
       .catch(() => {});
     fetch("http://34.229.16.201:8080/api/1.0.0/cities", { headers })
       .then((r) => r.json())
-      .then(setCities)
+      .then((data) => setCities(Array.isArray(data) ? data : []))
       .catch(() => {});
   }, []);
 
@@ -127,11 +127,12 @@ const Admin = () => {
             />
             <select name="aircraftId" onChange={handleInputChange} required>
               <option value="">Select Aircraft</option>
-              {aircrafts.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.type} ({a.airline?.name})
-                </option>
-              ))}
+              {Array.isArray(aircrafts) &&
+                aircrafts.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.type} ({a.airline?.name})
+                  </option>
+                ))}
             </select>
             <select
               name="originAirportId"
@@ -139,11 +140,12 @@ const Admin = () => {
               required
             >
               <option value="">Origin Airport</option>
-              {airports.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.code} - {a.name}
-                </option>
-              ))}
+              {Array.isArray(airports) &&
+                airports.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.code} - {a.name}
+                  </option>
+                ))}
             </select>
             <select
               name="destinationAirportId"
@@ -151,11 +153,12 @@ const Admin = () => {
               required
             >
               <option value="">Destination Airport</option>
-              {airports.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.code} - {a.name}
-                </option>
-              ))}
+              {Array.isArray(airports) &&
+                airports.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.code} - {a.name}
+                  </option>
+                ))}
             </select>
             <button type="submit">Add Flight</button>
           </form>
@@ -182,11 +185,12 @@ const Admin = () => {
             />
             <select name="airlineId" onChange={handleInputChange} required>
               <option value="">Select Airline</option>
-              {airlines.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.name}
-                </option>
-              ))}
+              {Array.isArray(airlines) &&
+                airlines.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                ))}
             </select>
             <button type="submit">Add Aircraft</button>
           </form>
@@ -207,11 +211,12 @@ const Admin = () => {
             />
             <select name="airportId" onChange={handleInputChange} required>
               <option value="">Select Airport</option>
-              {airports.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.name}
-                </option>
-              ))}
+              {Array.isArray(airports) &&
+                airports.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                ))}
             </select>
             <button type="submit">Add Gate</button>
           </form>
@@ -238,11 +243,12 @@ const Admin = () => {
             />
             <select name="cityId" onChange={handleInputChange} required>
               <option value="">Select City</option>
-              {cities.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}, {c.state}
-                </option>
-              ))}
+              {Array.isArray(cities) &&
+                cities.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}, {c.state}
+                  </option>
+                ))}
             </select>
             <button type="submit">Add Airport</button>
           </form>
@@ -278,7 +284,7 @@ const Admin = () => {
         <div className="login-link">
           <Link to="/login">Log out</Link>
         </div>
-        <div className="flight-link">
+        <div className="login-link">
           <Link to="/index">Home</Link>
         </div>
       </div>
