@@ -49,7 +49,7 @@ const Home = () => {
             <h1 className="header-title">Airport & Flight Tracker</h1>
           </Link>
           <div className="login-link">
-            <Link to="/admin">Admin</Link>
+            <Link to="/">Logout</Link>
           </div>
           <div className="flight-link">
             <Link to="/flights">Flights</Link>
