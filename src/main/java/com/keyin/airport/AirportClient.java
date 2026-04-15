@@ -15,7 +15,7 @@ public class AirportClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("34.229.16.201:8080/api/1.0.0/airports");
+            restClient.setURLRoot("http://34.229.16.201:8080/api/1.0.0/airports");
 
             String response = restClient.sendGetRequest();
 

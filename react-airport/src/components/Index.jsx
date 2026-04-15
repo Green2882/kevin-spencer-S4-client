@@ -14,7 +14,7 @@ const Home = () => {
     const airportId = params.get("airportId");
 
     if (airportId) {
-      fetch(`http://54.234.11.162:8080/airports/${airportId}`, {
+      fetch(`http://34.229.16.201:8080/api/1.0.0/airports/${airportId}`, {
         headers: {
           Authorization: auth,
         },
@@ -24,7 +24,7 @@ const Home = () => {
         .catch((error) => console.error("Error fetching airport:", error));
     }
 
-    fetch("http://54.234.11.162:8080/airports", {
+    fetch("http://34.229.16.201:8080/api/1.0.0/airports", {
       headers: {
         Authorization: auth,
       },

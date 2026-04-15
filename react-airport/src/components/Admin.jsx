@@ -17,51 +17,34 @@ const Admin = () => {
     const headers = { Authorization: auth };
 
     fetch("http://34.229.16.201:8080/api/1.0.0/airports", { headers })
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`Airports failed: ${r.status}`);
-        return r.json();
-      })
+      .then((r) => r.json())
       .then(setAirports)
-      .catch((err) => console.error(err));
-
-    fetch("http://34.229.16.201:8080/api/1.0.0/airline", { headers })
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`Airlines failed: ${r.status}`);
-        return r.json();
-      })
+      .catch(() => {});
+    fetch("http://34.229.16.201:8080/api/1.0.0/airlines", { headers })
+      .then((r) => r.json())
       .then(setAirlines)
-      .catch((err) => console.error(err));
-
+      .catch(() => {});
     fetch("http://34.229.16.201:8080/api/1.0.0/aircraft", { headers })
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`Aircraft failed: ${r.status}`);
-        return r.json();
-      })
+      .then((r) => r.json())
       .then(setAircrafts)
-      .catch((err) => console.error(err));
-
+      .catch(() => {});
     fetch("http://34.229.16.201:8080/api/1.0.0/cities", { headers })
-      .then(async (r) => {
-        if (!r.ok) throw new Error(`Cities failed: ${r.status}`);
-        return r.json();
-      })
+      .then((r) => r.json())
       .then(setCities)
-      .catch((err) => console.error(err));
+      .catch(() => {});
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = localStorage.getItem("auth");
-
     let endpoint = `http://34.229.16.201:8080/api/1.0.0/${activeTab}`;
-    if (activeTab === "aircraft") {
+    if (activeTab === "aircraft")
       endpoint = "http://34.229.16.201:8080/api/1.0.0/aircraft";
-    }
 
     let body = { ...formData };
 
@@ -75,15 +58,10 @@ const Admin = () => {
         destinationAirport: { id: formData.destinationAirportId },
       };
     } else if (activeTab === "aircraft") {
-      const selectedAirline = airlines.find(
-        (a) => String(a.id) === String(formData.airlineId),
-      );
-
       body = {
         type: formData.type,
-        airlineName:
-          selectedAirline?.airlineName || selectedAirline?.name || "",
         numOfPassengers: formData.numOfPassengers,
+        airline: { id: formData.airlineId },
       };
     } else if (activeTab === "gates") {
       body = {
@@ -95,10 +73,6 @@ const Admin = () => {
         name: formData.name,
         code: formData.code,
         city: { id: formData.cityId },
-      };
-    } else if (activeTab === "airlines") {
-      body = {
-        name: formData.name,
       };
     }
 
@@ -113,30 +87,12 @@ const Admin = () => {
       });
 
       if (response.ok) {
-        setMessage(
-          `Successfully added ${activeTab === "aircraft" ? "aircraft" : activeTab.slice(0, -1)}!`,
-        );
+        setMessage(`Successfully added ${activeTab.slice(0, -1)}!`);
         setFormData({});
-
-        if (activeTab === "aircraft") {
-          const refreshed = await fetch(
-            "http://34.229.16.201:8080/api/1.0.0/aircraft",
-            {
-              headers: { Authorization: auth },
-            },
-          );
-          if (refreshed.ok) {
-            const data = await refreshed.json();
-            setAircrafts(data);
-          }
-        }
       } else {
-        const errorText = await response.text();
-        console.error("POST failed:", response.status, errorText);
-        setMessage(`Error adding entry: ${response.status}`);
+        setMessage("Error adding entry. Check console.");
       }
     } catch (error) {
-      console.error(error);
       setMessage("Connection error.");
     }
   };
@@ -146,48 +102,40 @@ const Admin = () => {
       case "flights":
         return (
           <form onSubmit={handleSubmit} className="admin-form">
-            <h2>Add New Flight</h2>
+            <h2>
+              {" "}
+              Add New{" "}
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            </h2>
             <input
               name="flightNumber"
-              placeholder="Flight Number"
+              placeholder="Flight Number (e.g. AC123)"
               onChange={handleInputChange}
-              value={formData.flightNumber || ""}
               required
             />
             <input
               name="departureTime"
               type="datetime-local"
               onChange={handleInputChange}
-              value={formData.departureTime || ""}
               required
             />
             <input
               name="arrivalTime"
               type="datetime-local"
               onChange={handleInputChange}
-              value={formData.arrivalTime || ""}
               required
             />
-
-            <select
-              name="aircraftId"
-              onChange={handleInputChange}
-              value={formData.aircraftId || ""}
-              required
-            >
+            <select name="aircraftId" onChange={handleInputChange} required>
               <option value="">Select Aircraft</option>
               {aircrafts.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.type} (
-                  {a.airlineName || a.airline?.airlineName || a.airline?.name})
+                  {a.type} ({a.airline?.name})
                 </option>
               ))}
             </select>
-
             <select
               name="originAirportId"
               onChange={handleInputChange}
-              value={formData.originAirportId || ""}
               required
             >
               <option value="">Origin Airport</option>
@@ -197,11 +145,9 @@ const Admin = () => {
                 </option>
               ))}
             </select>
-
             <select
               name="destinationAirportId"
               onChange={handleInputChange}
-              value={formData.destinationAirportId || ""}
               required
             >
               <option value="">Destination Airport</option>
@@ -211,66 +157,55 @@ const Admin = () => {
                 </option>
               ))}
             </select>
-
             <button type="submit">Add Flight</button>
           </form>
         );
-
       case "aircraft":
         return (
           <form onSubmit={handleSubmit} className="admin-form">
-            <h2>Add New Aircraft</h2>
+            <h2>
+              {" "}
+              Add New{" "}
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            </h2>
             <input
               name="type"
-              placeholder="Aircraft Type"
+              placeholder="Aircraft Type (e.g. Boeing 737)"
               onChange={handleInputChange}
-              value={formData.type || ""}
               required
             />
             <input
               name="numOfPassengers"
               placeholder="Capacity"
               onChange={handleInputChange}
-              value={formData.numOfPassengers || ""}
               required
             />
-
-            <select
-              name="airlineId"
-              onChange={handleInputChange}
-              value={formData.airlineId || ""}
-              required
-            >
+            <select name="airlineId" onChange={handleInputChange} required>
               <option value="">Select Airline</option>
               {airlines.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.airlineName || a.name}
+                  {a.name}
                 </option>
               ))}
             </select>
-
             <button type="submit">Add Aircraft</button>
           </form>
         );
-
       case "gates":
         return (
           <form onSubmit={handleSubmit} className="admin-form">
-            <h2>Add New Gate</h2>
+            <h2>
+              {" "}
+              Add New{" "}
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            </h2>
             <input
               name="gateNumber"
-              placeholder="Gate Number"
+              placeholder="Gate Number (e.g. A1)"
               onChange={handleInputChange}
-              value={formData.gateNumber || ""}
               required
             />
-
-            <select
-              name="airportId"
-              onChange={handleInputChange}
-              value={formData.airportId || ""}
-              required
-            >
+            <select name="airportId" onChange={handleInputChange} required>
               <option value="">Select Airport</option>
               {airports.map((a) => (
                 <option key={a.id} value={a.id}>
@@ -278,36 +213,30 @@ const Admin = () => {
                 </option>
               ))}
             </select>
-
             <button type="submit">Add Gate</button>
           </form>
         );
-
       case "airports":
         return (
           <form onSubmit={handleSubmit} className="admin-form">
-            <h2>Add New Airport</h2>
+            <h2>
+              {" "}
+              Add New{" "}
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            </h2>
             <input
               name="name"
               placeholder="Airport Name"
               onChange={handleInputChange}
-              value={formData.name || ""}
               required
             />
             <input
               name="code"
-              placeholder="Airport Code"
+              placeholder="Airport Code (e.g. YYZ)"
               onChange={handleInputChange}
-              value={formData.code || ""}
               required
             />
-
-            <select
-              name="cityId"
-              onChange={handleInputChange}
-              value={formData.cityId || ""}
-              required
-            >
+            <select name="cityId" onChange={handleInputChange} required>
               <option value="">Select City</option>
               {cities.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -315,26 +244,26 @@ const Admin = () => {
                 </option>
               ))}
             </select>
-
             <button type="submit">Add Airport</button>
           </form>
         );
-
       case "airlines":
         return (
           <form onSubmit={handleSubmit} className="admin-form">
-            <h2>Add New Airline</h2>
+            <h2>
+              {" "}
+              Add New{" "}
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            </h2>
             <input
               name="name"
               placeholder="Airline Name"
               onChange={handleInputChange}
-              value={formData.name || ""}
               required
             />
             <button type="submit">Add Airline</button>
           </form>
         );
-
       default:
         return null;
     }
@@ -356,31 +285,74 @@ const Admin = () => {
 
       <div className="content-box admin-content">
         <div className="admin-topbar">
-          {["flights", "aircraft", "gates", "airports", "airlines"].map(
-            (tab) => (
-              <button
-                key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  setMessage("");
-                  setFormData({});
-                }}
-                className={`admin-topbar-btn ${activeTab === tab ? "active" : "inactive"}`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ),
-          )}
+          <button
+            onClick={() => {
+              setActiveTab("flights");
+              setMessage("");
+            }}
+            className={`admin-topbar-btn ${
+              activeTab === "flights" ? "active" : "inactive"
+            }`}
+          >
+            Flights
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("aircraft");
+              setMessage("");
+            }}
+            className={`admin-topbar-btn ${
+              activeTab === "aircraft" ? "active" : "inactive"
+            }`}
+          >
+            Aircraft
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("gates");
+              setMessage("");
+            }}
+            className={`admin-topbar-btn ${
+              activeTab === "gates" ? "active" : "inactive"
+            }`}
+          >
+            Gates
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("airports");
+              setMessage("");
+            }}
+            className={`admin-topbar-btn ${
+              activeTab === "airports" ? "active" : "inactive"
+            }`}
+          >
+            Airports
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("airlines");
+              setMessage("");
+            }}
+            className={`admin-topbar-btn ${
+              activeTab === "airlines" ? "active" : "inactive"
+            }`}
+          >
+            Airlines
+          </button>
         </div>
 
         <div className="admin-main-area">
           {message && (
             <p
-              className={`admin-message ${message.includes("Successfully") ? "success" : "error"}`}
+              className={`admin-message ${
+                message.includes("Successfully") ? "success" : "error"
+              }`}
             >
               {message}
             </p>
           )}
+
           <div className="admin-form-container">{renderForm()}</div>
         </div>
       </div>

@@ -15,7 +15,7 @@ public class AirlineClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("http://34.229.16.201:8080/airlines");
+            restClient.setURLRoot("http://34.229.16.201:8080/api/1.0.0/airlines");
 
             String response = restClient.sendGetRequest();
 

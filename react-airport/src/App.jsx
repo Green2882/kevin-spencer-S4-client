@@ -4,6 +4,7 @@ import "./App.css";
 import Index from "./components/Index.jsx";
 import Admin from "./components/Admin.jsx";
 import Flights from "./components/Flights.jsx";
+import Admin from "./components/Admin.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/index" element={<Index />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/flights" element={<Flights />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }
