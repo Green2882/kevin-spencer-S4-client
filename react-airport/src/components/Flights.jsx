@@ -11,7 +11,7 @@ const Flights = () => {
     const auth = localStorage.getItem("auth");
 
     // Fetch flights
-    fetch("http://54.234.11.162:8080/flights", {
+    fetch("http://34.229.16.201:8080/api/1.0.0/flights", {
       headers: {
         Authorization: auth,
       },
@@ -26,7 +26,7 @@ const Flights = () => {
       .catch((error) => console.error("Error fetching flights:", error));
 
     // Fetch airports
-    fetch("http://54.234.11.162:8080/airports", {
+    fetch("http://34.229.16.201:8080/api/1.0.0/airports", {
       headers: {
         Authorization: auth,
       },

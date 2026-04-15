@@ -14,7 +14,7 @@ public class AircraftClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("http://localhost:8080/aircraft");
+            restClient.setURLRoot("http://34.229.16.201:8080/api/1.0.0/aircraft");
 
             String response = restClient.sendGetRequest();
 

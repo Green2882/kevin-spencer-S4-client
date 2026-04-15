@@ -13,7 +13,7 @@ public class GateClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("http://localhost:8080/gates");
+            restClient.setURLRoot("http://34.229.16.201:8080/api/1.0.0/gates");
 
             String response = restClient.sendGetRequest();
 
