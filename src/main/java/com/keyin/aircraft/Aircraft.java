@@ -10,7 +10,7 @@ public class Aircraft {
 
     public Aircraft(String type, String airlineName, String numOfPassengers) {
         this.type = type;
-        Airline airline = new Airline(airlineName);
+        this.airline = new Airline(airlineName);
         this.numOfPassengers = numOfPassengers;
     }
 
@@ -36,8 +36,12 @@ public class Aircraft {
         this.airline = airline;
     }
 
-    public Airline getAirline() {
-        return airline;
+    public void setAirlineName(String airlineName) {
+        this.airline = new Airline(airlineName);
+    }
+
+    public String getAirline() {
+        return (airline != null) ? airline.getName() : null;
     }
 
     public String getType() {
@@ -53,9 +57,8 @@ public class Aircraft {
         return "Aircraft{" +
                 "id='" + id + '\'' +
                 ", type='" + type + '\'' +
-                ", airline='" + airline + '\'' +
+                ", airlineName='" + (airline != null ? airline.getName() : null) + '\'' +
                 ", numOfPassengers='" + numOfPassengers + '\'' +
                 '}';
     }
 }
-

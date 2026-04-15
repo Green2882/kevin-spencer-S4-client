@@ -25,7 +25,7 @@ public class AirlineClientTest {
         airlineClientUnderTest.setRestClient(mockRestClient);
 
         Mockito.when(mockRestClient.sendGetRequest()).thenReturn(
-                "[{\"id\":1,\"airlineName\":\"Air Canada\"}]");
+                "[{\"id\":1,\"name\":\"Air Canada\"}]");
 
         List<Airline> airlines = airlineClientUnderTest.getAllAirlines();
 
