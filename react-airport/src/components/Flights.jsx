@@ -6,7 +6,7 @@ const Flights = () => {
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/flights")
+    fetch("34.229.16.201:8080/api/1.0.0/flights")
       .then((response) => response.json())
       .then((data) => setFlights(data));
   }, []);

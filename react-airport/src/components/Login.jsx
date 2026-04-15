@@ -10,24 +10,33 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
 
-    const basicAuth = "Basic " + btoa(username + ":" + password);
+    const basicAuth = "Basic " + btoa(`${username}:${password}`);
 
     try {
-      const response = await fetch("http://localhost:8080/airports", {
-        method: "GET",
-        headers: {
-          Authorization: basicAuth,
+      const response = await fetch(
+        "http://34.229.16.201:8080/api/1.0.0/airports",
+        {
+          method: "GET",
+          headers: {
+            Authorization: basicAuth,
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
 
       if (response.ok) {
         localStorage.setItem("auth", basicAuth);
+        localStorage.setItem("username", username);
         navigate("/index");
-      } else {
+      } else if (response.status === 401) {
         setMessage("Invalid username or password");
+      } else {
+        setMessage(`Login failed: ${response.status}`);
       }
     } catch (error) {
+      console.error(error);
       setMessage("Could not connect to server");
     }
   };
@@ -42,6 +51,7 @@ const Login = () => {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
 
         <input
@@ -49,6 +59,7 @@ const Login = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button type="submit">Login</button>

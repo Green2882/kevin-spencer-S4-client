@@ -182,3 +182,112 @@ table, th, td{
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+/* Admin Styling */
+.admin-content {
+  height: auto;
+}
+
+.admin-topbar {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+  background: #f8f9fa;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.admin-topbar-btn {
+  padding: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.admin-topbar-btn.active {
+  background: black;
+  color: white;
+}
+
+.admin-topbar-btn.inactive {
+  background: white;
+  color: black;
+}
+
+.admin-main-area {
+  flex: 1;
+  padding: 40px 20px 20px 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 500px;
+  background: white;
+  padding: 30px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.admin-form h2 {
+  text-align: center;
+  padding: 10px;
+  margin-top: 0;
+}
+
+.admin-form input, .admin-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  color: black;
+}
+
+.admin-form button {
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-form button:hover {
+  background: #0056b3;
+}
+
+.admin-message {
+  font-weight: bold;
+  margin-bottom: 15px;
+  background: white;
+  text-align: center;
+}
+
+.admin-message.success {
+  color: green;
+}
+
+.admin-message.error {
+  color: red;
+}
+
+.admin-form-container {
+  margin-top: 30px;
+  background: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+}

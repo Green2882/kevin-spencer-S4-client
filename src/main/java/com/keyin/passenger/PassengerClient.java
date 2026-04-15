@@ -13,7 +13,7 @@ public class PassengerClient {
 
         if (getRestClient() != null) {
 
-            restClient.setURLRoot("http://localhost:8080/passengers");
+            restClient.setURLRoot("34.229.16.201:8080/api/1.0.0/passengers");
 
             String response = restClient.sendGetRequest();
 
